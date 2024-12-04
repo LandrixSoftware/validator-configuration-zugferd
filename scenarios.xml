@@ -6,24 +6,16 @@
 <scenarios xmlns="http://www.xoev.de/de/validator/framework/1/scenarios"
   frameworkVersion="1.0.0">
   <name>Validator Configuration ZUGFeRD 2.3.2</name>
-  <author>Landrix Software</author>
-  <date>2024-11-19</date>
+  <author>Landrix Software - Sven Harazim/
+          MGGM Software GmbH - Peter Sawatzki</author>
+  <date>2024-12-04</date>
   <description>
   <p>ZUGFeRD 2.3.2 Validator Configuration</p>
   </description>
-
-  <scenario>
+    <scenario>
     <name>EN16931 (CII) ZUGFeRD Extended</name>
     <description>
-      <p>Validates UN/CEFACT XML (SCRDM - CII uncoupled) version
-                D22B</p>
-      <p>Uses UN/CEFACT (SCRDM - CII uncoupled) version
-                D22B XML Schema, Schematron rules from EN16931:2017,
-                and XRechnung Schematron rules version 3.0.2 </p>
-      <p>Download of CII uncoupled XML Schema on 2024-11-19 from
-                https://projekte.kosit.org/api/v4/projects/356/packages/maven/de/xeinkauf/D16B_SCRDM__Subset__CII/D16B/D16B_SCRDM__Subset__CII-D16B.zip</p>
-      <p>Download of CII Schematron rules on 2024-11-19 from
-                https://github.com/ConnectingEurope/eInvoicing-EN16931/releases/download/validation-1.3.12/en16931-cii-1.3.12.zip </p>
+      <p>Validates ZUGFeRD Extended via Schema version D22B</p>
     </description>
     <!-- CII namespaces -->
     <namespace prefix="rsm"
@@ -32,24 +24,25 @@
       >urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100</namespace>
     <!-- Namespace for acceptMatch XPATH within validator report XML -->
     <namespace prefix="rep">http://www.xoev.de/de/validator/varl/1</namespace>
-    <match>exists(/rsm:CrossIndustryInvoice[ rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'])</match>
+
+    <match>exists(/rsm:CrossIndustryInvoice[ rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'])</match> 
+<!--    <match>exists(/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/rsm:GuidelineSpecifiedDocumentContextParameter/rsm:ID[ . = 'urn:factur-x.eu:1p0:extended'])</match> -->
     <validateWithXmlSchema>
       <resource>
-        <name>XML Schema for UN/CEFACT XML (SCRDM - CII
-                    uncoupled) EXTENDED</name>
-        <location>Schema/CII_D22B_XSD/CrossIndustryInvoice_100pD22B.xsd</location>
+        <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
+        <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>
       </resource>
     </validateWithXmlSchema>
     <validateWithSchematron>
       <resource>
-        <name>Schematron rules for EN16931 (CII)</name>
-        <location>Schema/Factur-X_1.07.2_EXTENDED/_XSLT_EXTENDED/FACTUR-X_EXTENDED.xslt</location>
+        <name>Schematron rules for Factur-X; 1.07.2; EN16931-CONFORMANT-EXTENDED</name>
+        <location>Schema/factur-x-1.07.2/4.%20Factur-X_1.07.2_EXTENDED/_XSLT_EXTENDED/FACTUR-X_EXTENDED.xslt</location>
       </resource>
     </validateWithSchematron>
 
     <createReport>
       <resource>
-        <name>Validation report for EN16931 (CII) EXTENDED</name>
+        <name>Validation report for EN16931-CONFORMANT-EXTENDED</name>
         <location>resources/xrechnung-report.xsl</location>
       </resource>
     </createReport>
