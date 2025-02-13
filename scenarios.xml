@@ -1,48 +1,207 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This is the source file for creating scenarios.xml 
-  -
-  - DO NOT USE DIRECTLY
-  -->
 <scenarios xmlns="http://www.xoev.de/de/validator/framework/1/scenarios"
   frameworkVersion="1.0.0">
   <name>Validator Configuration ZUGFeRD 2.3.2</name>
-  <author>Landrix Software - Sven Harazim/
-          MGGM Software GmbH - Peter Sawatzki</author>
-  <date>2024-12-04</date>
+  <author>MGGM Software GmbH - Peter Sawatzki/Landrix Software - Sven Harazim </author>
+  <date>2025-02-11</date>
   <description>
-  <p>ZUGFeRD 2.3.2 Validator Configuration</p>
+  <p>ZUGFeRD Validator Configuration ZUGFeRD 2.3.2</p>
   </description>
-    <scenario>
-    <name>EN16931 (CII) ZUGFeRD Extended</name>
+  
+  <scenario>
+    <name>EN16931 (CII) ZUGFeRD/Factur-X Extended</name>
     <description>
-      <p>Validates ZUGFeRD Extended via Schema version D22B</p>
+      <p>Validates ZUGFeRD/Factur-X Profile Extended via Schema version D22B</p>
     </description>
     <!-- CII namespaces -->
-    <namespace prefix="rsm"
-      >urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100</namespace>
-    <namespace prefix="ram"
-      >urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100</namespace>
+    <namespace prefix="rsm">urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100</namespace>
+    <namespace prefix="ram">urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100</namespace>
     <!-- Namespace for acceptMatch XPATH within validator report XML -->
     <namespace prefix="rep">http://www.xoev.de/de/validator/varl/1</namespace>
 
-    <match>exists(/rsm:CrossIndustryInvoice[ rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'])</match> 
-<!--    <match>exists(/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/rsm:GuidelineSpecifiedDocumentContextParameter/rsm:ID[ . = 'urn:factur-x.eu:1p0:extended'])</match> -->
+    <match>
+       exists(/rsm:CrossIndustryInvoice[ rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended']) <!-- ZUGFeRD 2.3 -->
+    or exists(/rsm:CrossIndustryInvoice[ rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:cen.eu:en16931:2017#conformant#urn:zugferd.de:2p0:extended']) <!-- old 2.0 version -->
+    </match>
     <validateWithXmlSchema>
       <resource>
-        <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
-        <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>
+<!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
+        <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
+        <name>XML Schema for FACTUR-X; 1.0; EN16931-CONFORMANT-EXTENDED</name>
+        <location>Schema/zugferd22/EXTENDED/FACTUR-X_EXTENDED.xsd</location>
       </resource>
     </validateWithXmlSchema>
     <validateWithSchematron>
       <resource>
         <name>Schematron rules for Factur-X; 1.07.2; EN16931-CONFORMANT-EXTENDED</name>
-        <location>Schema/factur-x-1.07.2/4.%20Factur-X_1.07.2_EXTENDED/_XSLT_EXTENDED/FACTUR-X_EXTENDED.xslt</location>
+<!--        <location>Schema/factur-x-1.07.2/4.%20Factur-X_1.07.2_EXTENDED/_XSLT_EXTENDED/FACTUR-X_EXTENDED.xslt</location> -->
+        <location>Schema/mggm_factur-x-1.07.2_EXTENDED.xslt</location> <!-- use human-readable-paths -->
       </resource>
     </validateWithSchematron>
 
     <createReport>
       <resource>
-        <name>Validation report for EN16931-CONFORMANT-EXTENDED</name>
+        <name>Validation report for ZUGFeRD/Factur-X Profile Extended</name>
+        <location>resources/xrechnung-report.xsl</location>
+      </resource>
+    </createReport>
+    <acceptMatch>/rep:report/rep:assessment[1]/rep:accept[1]</acceptMatch>
+  </scenario>
+
+  <scenario>
+    <name>ZUGFeRD/Factur-X Basic</name>
+    <description>
+      <p>Validates ZUGFeRD/Factur-X Profile Basic via Schema version D22B</p>
+    </description>
+    <!-- CII namespaces -->
+    <namespace prefix="rsm">urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100</namespace>
+    <namespace prefix="ram">urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100</namespace>
+    <!-- Namespace for acceptMatch XPATH within validator report XML -->
+    <namespace prefix="rep">http://www.xoev.de/de/validator/varl/1</namespace>
+
+    <match>
+       exists(/rsm:CrossIndustryInvoice[ rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic']) <!-- ZUGFeRD 2.3 -->
+    </match>
+    <validateWithXmlSchema>
+      <resource>
+<!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
+        <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
+        <name>XML Schema for FACTUR-X; 1.0; EN16931-CONFORMANT-EXTENDED</name>
+        <location>Schema/zugferd22/BASIC/FACTUR-X_BASIC.xsd</location>
+      </resource>
+    </validateWithXmlSchema>
+    <validateWithSchematron>
+      <resource>
+        <name>Schematron rules for Factur-X; 1.07.2; EN16931-COMPLIANT-BASIC</name>
+<!--        <location>Schema/factur-x-1.07.2/2.%20Factur-X_1.07.2_BASIC/_XSLT_BASIC/FACTUR-X_BASIC.xslt</location> -->
+        <location>Schema/mggm_factur-x-1.07.2_BASIC.xslt</location> <!-- use human-readable-paths -->
+      </resource>
+    </validateWithSchematron>
+
+    <createReport>
+      <resource>
+        <name>Validation report for ZUGFeRD/Factur-X Profile Basic</name>
+        <location>resources/xrechnung-report.xsl</location>
+      </resource>
+    </createReport>
+    <acceptMatch>/rep:report/rep:assessment[1]/rep:accept[1]</acceptMatch>
+  </scenario>
+
+  <scenario>
+    <name>ZUGFeRD/Factur-X BasicWL</name>
+    <description>
+      <p>Validates ZUGFeRD/Factur-X Profile BasicWL via Schema version D22B</p>
+    </description>
+    <!-- CII namespaces -->
+    <namespace prefix="rsm">urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100</namespace>
+    <namespace prefix="ram">urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100</namespace>
+    <!-- Namespace for acceptMatch XPATH within validator report XML -->
+    <namespace prefix="rep">http://www.xoev.de/de/validator/varl/1</namespace>
+
+    <match>
+       exists(/rsm:CrossIndustryInvoice[ rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:factur-x.eu:1p0:basicwl']) <!-- ZUGFeRD 2.3 -->
+    </match>
+    <validateWithXmlSchema>
+      <resource>
+<!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
+        <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
+        <name>XML Schema for FACTUR-X; 1.0; ACCOUNTING INFORMATION, No XML Invoice, (BASIC WITHOUT LINE)</name>
+        <location>Schema/zugferd22/BASIC-WL/FACTUR-X_BASIC-WL.xsd</location>
+      </resource>
+    </validateWithXmlSchema>
+    <validateWithSchematron>
+      <resource>
+        <name>Schematron rules for Factur-X; 1.07.2; EN16931-COMPLIANT-BASICWL</name>
+<!--        <location>Schema/factur-x-1.07.2/2.%20Factur-X_1.07.2_BASIC/_XSLT_BASIC/FACTUR-X_BASIC.xslt</location> -->
+        <location>Schema/mggm_factur-x-1.07.2_BASICWL.xslt</location> <!-- use human-readable-paths -->
+      </resource>
+    </validateWithSchematron>
+
+    <createReport>
+      <resource>
+        <name>Validation report for ZUGFeRD/Factur-X Profile BasicWL</name>
+        <location>resources/xrechnung-report.xsl</location>
+      </resource>
+    </createReport>
+    <acceptMatch>/rep:report/rep:assessment[1]/rep:accept[1]</acceptMatch>
+  </scenario>
+  
+   <scenario>
+    <name>ZUGFeRD/Factur-X Comfort (EN16931)</name>
+    <description>
+      <p>Validates ZUGFeRD/Factur-X Profile Comfort (EN16931) via Schema version D22B</p>
+    </description>
+    <!-- CII namespaces -->
+    <namespace prefix="rsm">urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100</namespace>
+    <namespace prefix="ram">urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100</namespace>
+    <!-- Namespace for acceptMatch XPATH within validator report XML -->
+    <namespace prefix="rep">http://www.xoev.de/de/validator/varl/1</namespace>
+
+    <match>
+       exists(/rsm:CrossIndustryInvoice[ rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:cen.eu:en16931:2017']) <!-- ZUGFeRD 2.3 -->
+   <!-- or exists(/rsm:CrossIndustryInvoice[ rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:comfort']) 
+   -->
+       
+    </match>
+    <validateWithXmlSchema>
+      <resource>
+<!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
+        <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
+        <name>XML Schema for FACTUR-X; 1.0; EN16931-CONFORMANT-EXTENDED</name>
+        <location>Schema/zugferd22/EN16931/FACTUR-X_EN16931.xsd</location>
+      </resource>
+    </validateWithXmlSchema>
+    <validateWithSchematron>
+      <resource>
+        <name>Schematron rules for Factur-X; 1.07.2; EN16931-COMPLIANT (FULLY)</name>
+ <!--       <location>Schema/factur-x-1.07.2/3.%20Factur-X_1.07.2_EN16931/_XSLT_EN16931/FACTUR-X_EN16931.xslt</location> -->
+         <location>Schema/mggm_factur-x-1.07.2_EN16931.xslt</location> <!-- use human-readable-paths -->
+      </resource>
+    </validateWithSchematron>
+
+    <createReport>
+      <resource>
+        <name>Validation report for ZUGFeRD/Factur-X Comfort (EN16931)</name>
+        <location>resources/xrechnung-report.xsl</location>
+      </resource>
+    </createReport>
+    <acceptMatch>/rep:report/rep:assessment[1]/rep:accept[1]</acceptMatch>
+  </scenario>
+
+   <scenario>
+    <name>ZUGFeRD/Factur-X MINIMUM </name>
+    <description>
+      <p>Validates ZUGFeRD/Factur-X Profile MINIMUM via Schema version D22B</p>
+    </description>
+    <!-- CII namespaces -->
+    <namespace prefix="rsm">urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100</namespace>
+    <namespace prefix="ram">urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100</namespace>
+    <!-- Namespace for acceptMatch XPATH within validator report XML -->
+    <namespace prefix="rep">http://www.xoev.de/de/validator/varl/1</namespace>
+
+    <match>
+       exists(/rsm:CrossIndustryInvoice[ rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:factur-x.eu:1p0:minimum']) <!-- ZUGFeRD 2.3 -->
+       
+    </match>
+    <validateWithXmlSchema>
+      <resource>
+<!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
+        <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
+        <name>XML Schema for FACTUR-X; 1.0; ACCOUNTING INFORMATION, No XML Invoice, (MINIMUM)</name>
+        <location>Schema/zugferd22/MINIMUM/FACTUR-X_MINIMUM.xsd</location>
+      </resource>
+    </validateWithXmlSchema>
+    <validateWithSchematron>
+      <resource>
+        <name>Schematron rules for Factur-X; 1.07.2; ACCOUNTING INFORMATION, No XML Invoice, (MINIMUM)</name>
+ <!--       <location>Schema/factur-x-1.07.2/3.%20Factur-X_1.07.2_MINIMUM/_XSLT_MINIMUM/FACTUR-X_MINIMUM.xslt</location> -->
+         <location>Schema/mggm_factur-x-1.07.2_MINIMUM.xslt</location> <!-- use human-readable-paths -->
+      </resource>
+    </validateWithSchematron>
+
+    <createReport>
+      <resource>
+        <name>Validation report for ZUGFeRD/Factur-X MINIMUM</name>
         <location>resources/xrechnung-report.xsl</location>
       </resource>
     </createReport>
@@ -57,3 +216,4 @@
     </resource>
   </noScenarioReport>
 </scenarios>
+
