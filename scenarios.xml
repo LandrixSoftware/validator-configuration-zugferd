@@ -3,9 +3,9 @@
   frameworkVersion="1.0.0">
   <name>Validator Configuration ZUGFeRD 2.3.2</name>
   <author>
-    <p>W. &amp; L. Jordan GmbH - Jan-Frederick Harms</p>
-    <p>MGGM Software GmbH - Peter Sawatzki</p>
-    <p>Landrix Software - Sven Harazim</p>
+    W. &amp; L. Jordan GmbH - Jan-Frederick Harms
+    MGGM Software GmbH - Peter Sawatzki
+    Landrix Software - Sven Harazim
   </author>
   <date>2025-03-28</date>
   <description>
@@ -32,7 +32,7 @@
 <!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
         <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
         <name>XML Schema for FACTUR-X; 1.0; EN16931-CONFORMANT-EXTENDED</name>
-        <location>Schema/zugferd22/EXTENDED/FACTUR-X_EXTENDED.xsd</location>
+        <location>Schema/factur-x-1.07.2/4.%20Factur-X_1.07.2_EXTENDED/Factur-X_1.07.2_EXTENDED.xsd</location>
       </resource>
     </validateWithXmlSchema>
     <validateWithSchematron>
@@ -71,7 +71,7 @@
 <!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
         <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
         <name>XML Schema for FACTUR-X; 1.0; BASIC</name>
-        <location>Schema/zugferd22/BASIC/FACTUR-X_BASIC.xsd</location>
+        <location>Schema/factur-x-1.07.2/2.%20Factur-X_1.07.2_BASIC/Factur-X_1.07.2_BASIC.xsd</location>
       </resource>
     </validateWithXmlSchema>
     <validateWithSchematron>
@@ -110,7 +110,7 @@
 <!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
         <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
         <name>XML Schema for FACTUR-X; 1.0; ACCOUNTING INFORMATION, No XML Invoice, (BASIC WITHOUT LINE)</name>
-        <location>Schema/zugferd22/BASIC-WL/FACTUR-X_BASIC-WL.xsd</location>
+        <location>Schema/factur-x-1.07.2/1.%20Factur-X_1.07.2_BASICWL/Factur-X_1.07.2_BASICWL.xsd</location>
       </resource>
     </validateWithXmlSchema>
     <validateWithSchematron>
@@ -152,7 +152,7 @@
 <!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
         <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
         <name>XML Schema for FACTUR-X; 1.0; EN16931-CONFORMANT-COMFORT</name>
-        <location>Schema/zugferd22/EN16931/FACTUR-X_EN16931.xsd</location>
+        <location>Schema/factur-x-1.07.2/3.%20Factur-X_1.07.2_EN16931/Factur-X_1.07.2_EN16931.xsd</location>
       </resource>
     </validateWithXmlSchema>
     <validateWithSchematron>
@@ -192,7 +192,7 @@
 <!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
         <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
         <name>XML Schema for FACTUR-X; 1.0; ACCOUNTING INFORMATION, No XML Invoice, (MINIMUM)</name>
-        <location>Schema/zugferd22/MINIMUM/FACTUR-X_MINIMUM.xsd</location>
+        <location>Schema/factur-x-1.07.2/0.%20Factur-X_1.07.2_MINIMUM/Factur-X_1.07.2_MINIMUM.xsd</location>
       </resource>
     </validateWithXmlSchema>
     <validateWithSchematron>
