@@ -2,14 +2,18 @@
 <scenarios xmlns="http://www.xoev.de/de/validator/framework/1/scenarios"
   frameworkVersion="1.0.0">
   <name>Validator Configuration ZUGFeRD 2.3.2</name>
-  <author>MGGM Software GmbH - Peter Sawatzki/Landrix Software - Sven Harazim </author>
-  <date>2025-02-11</date>
+  <author>
+    <p>W. &amp; L. Jordan GmbH - Jan-Frederick Harms</p>
+    <p>MGGM Software GmbH - Peter Sawatzki</p>
+    <p>Landrix Software - Sven Harazim</p>
+  </author>
+  <date>2025-03-28</date>
   <description>
-  <p>ZUGFeRD Validator Configuration ZUGFeRD 2.3.2</p>
+  <p>ZUGFeRD Validator Configuration ZUGFeRD 2.3.2/Factur-X 1.07.2</p>
   </description>
   
   <scenario>
-    <name>EN16931 (CII) ZUGFeRD/Factur-X Extended</name>
+    <name>ZUGFeRD 2.3.2/Factur-X 1.07.2 - EN16931 (CII) Extended</name>
     <description>
       <p>Validates ZUGFeRD/Factur-X Profile Extended via Schema version D22B</p>
     </description>
@@ -35,7 +39,7 @@
       <resource>
         <name>Schematron rules for Factur-X; 1.07.2; EN16931-CONFORMANT-EXTENDED</name>
 <!--        <location>Schema/factur-x-1.07.2/4.%20Factur-X_1.07.2_EXTENDED/_XSLT_EXTENDED/FACTUR-X_EXTENDED.xslt</location> -->
-        <location>Schema/mggm_factur-x-1.07.2_EXTENDED.xslt</location> <!-- use human-readable-paths -->
+        <location>Schema/Factur-X-1.07.2_EXTENDED.xslt</location> <!-- use human-readable-paths -->
       </resource>
     </validateWithSchematron>
 
@@ -49,7 +53,7 @@
   </scenario>
 
   <scenario>
-    <name>ZUGFeRD/Factur-X Basic</name>
+    <name>ZUGFeRD 2.3.2/Factur-X 1.07.2 - Basic</name>
     <description>
       <p>Validates ZUGFeRD/Factur-X Profile Basic via Schema version D22B</p>
     </description>
@@ -66,15 +70,15 @@
       <resource>
 <!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
         <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
-        <name>XML Schema for FACTUR-X; 1.0; EN16931-CONFORMANT-EXTENDED</name>
+        <name>XML Schema for FACTUR-X; 1.0; BASIC</name>
         <location>Schema/zugferd22/BASIC/FACTUR-X_BASIC.xsd</location>
       </resource>
     </validateWithXmlSchema>
     <validateWithSchematron>
       <resource>
-        <name>Schematron rules for Factur-X; 1.07.2; EN16931-COMPLIANT-BASIC</name>
+        <name>Schematron rules for Factur-X; 1.07.2; BASIC</name>
 <!--        <location>Schema/factur-x-1.07.2/2.%20Factur-X_1.07.2_BASIC/_XSLT_BASIC/FACTUR-X_BASIC.xslt</location> -->
-        <location>Schema/mggm_factur-x-1.07.2_BASIC.xslt</location> <!-- use human-readable-paths -->
+        <location>Schema/Factur-X-1.07.2_BASIC.xslt</location> <!-- use human-readable-paths -->
       </resource>
     </validateWithSchematron>
 
@@ -88,7 +92,7 @@
   </scenario>
 
   <scenario>
-    <name>ZUGFeRD/Factur-X BasicWL</name>
+    <name>ZUGFeRD 2.3.2/Factur-X 1.07.2 - BasicWL</name>
     <description>
       <p>Validates ZUGFeRD/Factur-X Profile BasicWL via Schema version D22B</p>
     </description>
@@ -113,7 +117,7 @@
       <resource>
         <name>Schematron rules for Factur-X; 1.07.2; EN16931-COMPLIANT-BASICWL</name>
 <!--        <location>Schema/factur-x-1.07.2/2.%20Factur-X_1.07.2_BASIC/_XSLT_BASIC/FACTUR-X_BASIC.xslt</location> -->
-        <location>Schema/mggm_factur-x-1.07.2_BASICWL.xslt</location> <!-- use human-readable-paths -->
+        <location>Schema/Factur-X-1.07.2_BASICWL.xslt</location> <!-- use human-readable-paths -->
       </resource>
     </validateWithSchematron>
 
@@ -127,7 +131,7 @@
   </scenario>
   
    <scenario>
-    <name>ZUGFeRD/Factur-X Comfort (EN16931)</name>
+    <name>ZUGFeRD 2.3.2/Factur-X 1.07.2 - Comfort (EN16931)</name>
     <description>
       <p>Validates ZUGFeRD/Factur-X Profile Comfort (EN16931) via Schema version D22B</p>
     </description>
@@ -147,7 +151,7 @@
       <resource>
 <!--    <name>UN/CEFACT XML Schema for Cross Industry Invoice (CII)</name>
         <location>Schema/factur-x-1.07.2/5.%20CII%20D22B%20XSD/CrossIndustryInvoice_100pD22B.xsd</location>  -->
-        <name>XML Schema for FACTUR-X; 1.0; EN16931-CONFORMANT-EXTENDED</name>
+        <name>XML Schema for FACTUR-X; 1.0; EN16931-CONFORMANT-COMFORT</name>
         <location>Schema/zugferd22/EN16931/FACTUR-X_EN16931.xsd</location>
       </resource>
     </validateWithXmlSchema>
@@ -155,7 +159,7 @@
       <resource>
         <name>Schematron rules for Factur-X; 1.07.2; EN16931-COMPLIANT (FULLY)</name>
  <!--       <location>Schema/factur-x-1.07.2/3.%20Factur-X_1.07.2_EN16931/_XSLT_EN16931/FACTUR-X_EN16931.xslt</location> -->
-         <location>Schema/mggm_factur-x-1.07.2_EN16931.xslt</location> <!-- use human-readable-paths -->
+         <location>Schema/Factur-X-1.07.2_EN16931.xslt</location> <!-- use human-readable-paths -->
       </resource>
     </validateWithSchematron>
 
@@ -169,7 +173,7 @@
   </scenario>
 
    <scenario>
-    <name>ZUGFeRD/Factur-X MINIMUM </name>
+    <name>ZUGFeRD 2.3.2/Factur-X 1.07.2 - MINIMUM </name>
     <description>
       <p>Validates ZUGFeRD/Factur-X Profile MINIMUM via Schema version D22B</p>
     </description>
@@ -195,7 +199,7 @@
       <resource>
         <name>Schematron rules for Factur-X; 1.07.2; ACCOUNTING INFORMATION, No XML Invoice, (MINIMUM)</name>
  <!--       <location>Schema/factur-x-1.07.2/3.%20Factur-X_1.07.2_MINIMUM/_XSLT_MINIMUM/FACTUR-X_MINIMUM.xslt</location> -->
-         <location>Schema/mggm_factur-x-1.07.2_MINIMUM.xslt</location> <!-- use human-readable-paths -->
+         <location>Schema/Factur-X-1.07.2_MINIMUM.xslt</location> <!-- use human-readable-paths -->
       </resource>
     </validateWithSchematron>
 
