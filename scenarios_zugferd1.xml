@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scenarios xmlns="http://www.xoev.de/de/validator/framework/1/scenarios"
   frameworkVersion="1.0.0">
-  <name>Validator Configuration ZUGFeRD 2.3.2</name>
-  <author>MGGM Software GmbH - Peter Sawatzki/Landrix Software - Sven Harazim </author>
+  <name>Validator Configuration ZUGFeRD 1.0</name>
+  <author>MGGM Software GmbH - Peter Sawatzki / Landrix Software - Sven Harazim </author>
   <date>2025-02-13</date>
   <description>
   <p>ZUGFeRD Validator Configuration ZUGFeRD 1.0 (experimental)</p>
@@ -20,7 +20,9 @@
     <namespace prefix="rep">http://www.xoev.de/de/validator/varl/1</namespace>
 
     <match>
-       exists(/rsm:CrossIndustryDocument[ rsm:SpecifiedExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:ferd:CrossIndustryDocument:invoice:1p0:extended']) <!-- ZUGFeRD 1.0 -->
+       exists(/rsm:CrossIndustryDocument[ rsm:SpecifiedExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:ferd:CrossIndustryDocument:invoice:1p0:extended']) <!-- ZUGFeRD 1.0 extended -->
+    or exists(/rsm:CrossIndustryDocument[ rsm:SpecifiedExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:ferd:CrossIndustryDocument:invoice:1p0:comfort'])  <!-- ZUGFeRD 1.0 comfort -->
+    or exists(/rsm:CrossIndustryDocument[ rsm:SpecifiedExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:ferd:CrossIndustryDocument:invoice:1p0:basic'])  <!-- ZUGFeRD 1.0 basic -->
     </match>
     <validateWithXmlSchema>
       <resource>
