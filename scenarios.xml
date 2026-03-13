@@ -225,11 +225,14 @@
 
     <!-- Fallback: matcht alle EN16931-Spezialisierungen (z.B. #compliant#..., #conformant#...),
          AUSSER: exaktes 'urn:cen.eu:en16931:2017' (bereits durch Comfort-Scenario abgedeckt)
+         AUSSER: ZUGFeRD/Factur-X-Profile mit 'factur-x.eu' oder 'zugferd.de' (durch spezifische Scenarios abgedeckt)
          AUSSER: XRechnung-Varianten mit 'xeinkauf.de' (durch XRechnung-Scenarios abgedeckt) -->
     <match>
        exists(/rsm:CrossIndustryInvoice[
          contains(rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text(), 'urn:cen.eu:en16931:2017')
          and not(rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:cen.eu:en16931:2017')
+         and not(contains(rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text(), 'factur-x.eu'))
+         and not(contains(rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text(), 'zugferd.de'))
          and not(contains(rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text(), 'xeinkauf.de'))
        ])
     </match>
