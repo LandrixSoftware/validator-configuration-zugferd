@@ -210,7 +210,52 @@
     <acceptMatch>/rep:report/rep:assessment[1]/rep:accept[1]</acceptMatch>
   </scenario>
 
-  <!-- In case none of the aboce scenarios matched/were applied -->
+  <scenario>
+    <name>ZUGFeRD/Factur-X - EN16931 (CII) Generic</name>
+    <description>
+      <p>Generic fallback for any CII document whose GuidelineSpecifiedDocumentContextParameter
+      contains urn:cen.eu:en16931:2017 but was not matched by a more specific scenario above.
+      Validates against EN16931 (Comfort) schema and schematron.</p>
+    </description>
+    <!-- CII namespaces -->
+    <namespace prefix="rsm">urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100</namespace>
+    <namespace prefix="ram">urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100</namespace>
+    <!-- Namespace for acceptMatch XPATH within validator report XML -->
+    <namespace prefix="rep">http://www.xoev.de/de/validator/varl/1</namespace>
+
+    <!-- Fallback: matcht alle EN16931-Spezialisierungen (z.B. #compliant#..., #conformant#...),
+         AUSSER: exaktes 'urn:cen.eu:en16931:2017' (bereits durch Comfort-Scenario abgedeckt)
+         AUSSER: XRechnung-Varianten mit 'xeinkauf.de' (durch XRechnung-Scenarios abgedeckt) -->
+    <match>
+       exists(/rsm:CrossIndustryInvoice[
+         contains(rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text(), 'urn:cen.eu:en16931:2017')
+         and not(rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text() = 'urn:cen.eu:en16931:2017')
+         and not(contains(rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID/text(), 'xeinkauf.de'))
+       ])
+    </match>
+    <validateWithXmlSchema>
+      <resource>
+        <name>XML Schema for FACTUR-X; 1.0; EN16931-CONFORMANT-COMFORT</name>
+        <location>Schema/factur-x-1.08/3_Factur-X_1.08_EN16931/Factur-X_EN16931.xsd</location>
+      </resource>
+    </validateWithXmlSchema>
+    <validateWithSchematron>
+      <resource>
+        <name>Schematron rules for Factur-X; 1.08; EN16931-COMPLIANT (FULLY)</name>
+        <location>Schema/Factur-X-1.08_EN16931.xslt</location>
+      </resource>
+    </validateWithSchematron>
+
+    <createReport>
+      <resource>
+        <name>Validation report for EN16931 (CII) Generic</name>
+        <location>resources/xrechnung-report.xsl</location>
+      </resource>
+    </createReport>
+    <acceptMatch>/rep:report/rep:assessment[1]/rep:accept[1]</acceptMatch>
+  </scenario>
+
+  <!-- In case none of the above scenarios matched/were applied -->
   <noScenarioReport>
     <resource>
       <name>Default Report</name>
